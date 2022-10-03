@@ -9,11 +9,11 @@ despues de clonar el codigo utilizar el comando dentro del directorio "conta_fac
 ```sh
 npm install 
 ```
-### Crear la base de datos y cargar los seeds :
+### 2. Crear la base de datos y cargar los seeds :
 ```sh
 npx prisma migrate dev
 ```
-### iniciar el servidor 
+### 3. iniciar el servidor 
 ```sh
 node app.js
 ```
