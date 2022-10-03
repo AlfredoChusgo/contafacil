@@ -86,4 +86,8 @@ app.post('/accountingRecord', async (req, res) => {
   res.json(entity)
 })
 
-const server = app.listen(3000)
+const port = 3000
+const server = app.listen(port, () => {
+  console.log(`ContaFacil backend app listening on port ${port}`)
+})
+

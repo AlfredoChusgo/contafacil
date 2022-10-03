@@ -14,7 +14,7 @@ orm prisma
 node js
 postman
 docker
- 
+git - branching
 
 authentication //pending
 
