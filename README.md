@@ -5,15 +5,21 @@
 
 ## Steps    
 ### 1. Clonar el repositorio
-despues de clonar el codigo utilizar el comando dentro del directorio "conta_facil_backend_app" para instalar las dependencias ejecutar :
+
+### 2. Ingresar al directorio contenedor del backend
+```sh
+    cd conta_facil_backend_app
+```
+
+### 3. Instalar node modules 
 ```sh
 npm install 
 ```
-### 2. Crear la base de datos y cargar los seeds :
+### 4. Crear la base de datos y cargar los seeds :
 ```sh
 npx prisma migrate dev
 ```
-### 3. iniciar el servidor 
+### 5. Iniciar el servidor 
 ```sh
 node app.js
 ```
