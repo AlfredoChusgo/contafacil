@@ -7,8 +7,17 @@
         <div class="row">
             <div class="offset-lg-3 col-lg-6">
                 <div class="form-group">
-                    <label for="txtcode">Código</label>
-                    <input type="text" id="txtcode" class="form-control" formControlName="code" autocomplete="off" />
+                    <label for="txtcode">ID</label>
+                    <input type="text" id="txtid" class="form-control" formControlName="id" autocomplete="off" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6">
+                <div class="form-group">
+                     <label>Codigo</label>
+                   <input type="text" class="form-control" formControlName="code" autocomplete="off" /> 
+                    <span *ngIf="code && code.invalid && code.touched" class="error">Por favor ingresar Código</span> 
                 </div>
             </div>
         </div>
@@ -65,7 +74,7 @@
             </div>
             <div class="col-lg-3">
                 <br>
-                 <span class={{messageclass}}>{{message}}</span> 
+                 <span class={{messageclass}}>{{message }}</span> 
             </div>
         </div>
 

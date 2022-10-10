@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ProductoService } from 'src/app/service/producto.service';
+import { productomodel } from '../model/productomodel';
 
 @Component({
   selector: 'app-prodlistar',
@@ -8,12 +10,19 @@ import { ProductoService } from 'src/app/service/producto.service';
 })
 export class ProdlistarComponent implements OnInit {
   productodata:any;
-  constructor(private service:ProductoService) { 
+  //productdata!:productomodel[];
+
+  constructor(private service:ProductoService, private dialog: MatDialog) { 
     this.LoadAll();
+    this.service.Refreshrequired.subscribe( response =>{
+      this.LoadAll();
+    });
   }
 
   ngOnInit(): void {
   }
+
+  //mostrarColumnas:string[]=["id","code","name","action"]
 
   LoadAll(){
     this.service.LoadAllProductos().subscribe(result=>{
