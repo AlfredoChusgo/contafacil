@@ -9,6 +9,8 @@ import { ProdlistarComponent } from './Gproducto/prodlistar/prodlistar.component
 import { ProdadicionarComponent } from './Gproducto/prodadicionar/prodadicionar.component';
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
+import { MaterialModule } from 'src/MaterialModule';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule, ReactiveFormsModule
+    HttpClientModule, ReactiveFormsModule, MaterialModule,BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
