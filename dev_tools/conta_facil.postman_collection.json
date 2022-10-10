@@ -1,0 +1,225 @@
+{
+	"info": {
+		"_postman_id": "d0b38c9f-c90a-46e9-a4b7-a0c41154af77",
+		"name": "conta_facil",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23004627"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"{{$randomUserName}}\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{user_endpoint}}",
+							"host": [
+								"{{base_url}}{{user_endpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{user_endpoint}}",
+							"host": [
+								"{{user_endpoint}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "GetProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{product_endpoint}}",
+							"host": [
+								"{{product_endpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\":\"{{$guid}}\",\r\n    \"name\":\"{{$randomProduct}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{product_endpoint}}",
+							"host": [
+								"{{product_endpoint}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Companies",
+			"item": [
+				{
+					"name": "GetCompanies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{company_endpoint}}",
+							"host": [
+								"{{company_endpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateCompany",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nit\": {{$randomBankAccount}},\r\n    \"name\": \"{{$randomCompanyName}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{company_endpoint}}",
+							"host": [
+								"{{company_endpoint}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AccountRecord",
+			"item": [
+				{
+					"name": "Get Account Records",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{account_record_endpoint}}",
+							"host": [
+								"{{account_record_endpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateAccountRecord",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"{{$isoTimestamp}}\",\r\n    \"total\": {{$randomPrice}},\r\n    \"recordType\": \"incoming\",\r\n    \"userId\": {{randomNumber}},\r\n    \"companyId\": {{randomNumber}},\r\n    \"productId\": {{randomNumber}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{account_record_endpoint}}",
+							"host": [
+								"{{account_record_endpoint}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.globals.set('randomNumber', Math.floor(Math.random() * 5));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "user_endpoint",
+			"value": "{{base_url}}/user",
+			"type": "string"
+		},
+		{
+			"key": "product_endpoint",
+			"value": "{{base_url}}/product",
+			"type": "string"
+		},
+		{
+			"key": "company_endpoint",
+			"value": "{{base_url}}/company",
+			"type": "string"
+		},
+		{
+			"key": "account_record_endpoint",
+			"value": "{{base_url}}/accountingRecord",
+			"type": "string"
+		}
+	]
+}
