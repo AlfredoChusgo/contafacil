@@ -69,8 +69,8 @@ app.post('/product', async (req, res) => {
   })
   res.json(entity)
 })
-app.post('/product/:id', async (req, res) => {
-  const { id,code,name } = req.params
+app.post('/editproduct/', async (req, res) => {
+  const { id,code,name } = req.body
   const entity = await prisma.product.update({
     where: {
       id:+id,
