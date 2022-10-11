@@ -37,8 +37,9 @@ export class ProdadicionarComponent implements OnInit {
 
    guardarProducto() { 
     if (this.formproducto.valid) {
+      if(this.productoid ==null){console.log('not null'+this.productoid)
         this.service.SaveProducto(this.formproducto.value).subscribe(
-          result => { console.log("result:"+result)
+          result => { 
             if(result != null){    
                 this.saveresp = result;             
                 if (this.saveresp.message != 'added') {
@@ -58,6 +59,29 @@ export class ProdadicionarComponent implements OnInit {
               this.messageclass = 'error'
             }  
         });
+      }else{
+        this.service.UpdateProducto(this.formproducto.value).subscribe(
+          result => { 
+            if(result != null){    
+                this.saveresp = result;             
+                if (this.saveresp.message != 'added') {
+                  this.message = "Guardado Correctamente."
+                  this.messageclass = 'sucess'
+                  this.limpiarFormProducto()
+  
+                } else if(this.saveresp.message == 'updated'){
+                  this.message = "Actualizado correctamente."
+                  this.messageclass = "sucess"
+                }else{
+                  this.message = "Falló al Guardar."
+                  this.messageclass = 'error'
+                }
+            }else{
+              this.message = "Falló al Guardar."
+              this.messageclass = 'error'
+            }  
+        });
+      }
     } else {
       this.message = "Por favor ingresar datos válidos. Verifique..."
       this.messageclass = 'error'

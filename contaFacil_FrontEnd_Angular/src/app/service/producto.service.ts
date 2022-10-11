@@ -35,6 +35,14 @@ ar:any;
       })
     );
   }
+  UpdateProducto(data:any){
+    return this.http.post('/api/editproduct/',data).pipe(
+      tap((data)=>{
+        this.refreshrequired.next()
+          console.log(data);        
+      })
+    );
+  }
 
   EliminarProducto(id:any){
     return this.http.delete('/api/product/'+id);
