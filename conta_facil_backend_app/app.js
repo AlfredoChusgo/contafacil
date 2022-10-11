@@ -12,7 +12,7 @@ app.delete('/user/:id', async (req, res) => {
   const { id } = req.params
   const user = await prisma.user.delete({
     where: {
-      id,
+      id:+id,
     },
   })
   res.json(user)
@@ -39,12 +39,44 @@ app.get('/product', async (req, res) => {
   res.json(entities)
 })
 
+app.get('/product/:id', async (req, res) => {
+  const { id} = req.params
+  const entity = await prisma.product.findUnique({
+    where: {
+      id:+id
+    } 
+  });
+  res.json(entity)
+})
+
+app.delete('/product/:id', async (req, res) => {
+  const { id } = req.params
+  const entity = await prisma.product.delete({
+    where: {
+      id:+id,
+    },
+  })
+  res.json(entity)
+})
+
 app.post('/product', async (req, res) => {
   const { code, name } = req.body
   const entity = await prisma.product.create({
     data: {
       code,
       name,
+    },
+  })
+  res.json(entity)
+})
+app.post('/product/:id', async (req, res) => {
+  const { id,code,name } = req.params
+  const entity = await prisma.product.update({
+    where: {
+      id:+id,
+    },
+    data:{
+      code,name,
     },
   })
   res.json(entity)
