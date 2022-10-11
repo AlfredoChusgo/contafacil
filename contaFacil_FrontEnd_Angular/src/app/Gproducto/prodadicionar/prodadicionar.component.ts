@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from 'src/app/service/producto.service'; 
 
 
@@ -9,14 +10,22 @@ import { ProductoService } from 'src/app/service/producto.service';
   styleUrls: ['./prodadicionar.component.scss']
 })
 export class ProdadicionarComponent implements OnInit {
-
-  constructor( private service:ProductoService) { }
-
-  ngOnInit(): void {
-  }
   saveresp:any;
   message='';
   messageclass='';
+  editdata:any;
+  productoid:any;
+
+  constructor( private service:ProductoService, private route: ActivatedRoute) {
+    this.productoid=this.route.snapshot.paramMap.get('id');
+    if (this.productoid != null && this.productoid != 0) {
+      this.actualizarProducto(this.productoid);
+    }
+   }
+
+  ngOnInit(): void {
+  }
+
   formproducto = new FormGroup({
     id: new FormControl({ value: '', disabled: true }),
     code: new FormControl('', Validators.required),
@@ -53,6 +62,19 @@ export class ProdadicionarComponent implements OnInit {
       this.message = "Por favor ingresar datos válidos. Verifique..."
       this.messageclass = 'error'
     }
+  }
+
+  actualizarProducto(id:any){
+      this.service.ProductoByCode(id).subscribe(data=>{
+        this.editdata=data;
+        if(this.editdata != null){
+            this.formproducto = new FormGroup({
+              id: new FormControl(this.editdata.id),
+              code: new FormControl(this.editdata.code),
+              name: new FormControl(this.editdata.name)
+            })
+        } 
+      })
   }
 
   limpiarFormProducto(){

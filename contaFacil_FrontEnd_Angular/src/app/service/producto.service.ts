@@ -23,8 +23,8 @@ get Refreshrequired(){
     return this.http.get('/api/product');
   }
 
-  ProductoByCode(code:any):Observable<any>{
-    return this.http.get('/api/product/'+code);
+  ProductoByCode(id:Number):Observable<any>{
+    return this.http.get('/api/product/'+id);
   }
 ar:any;
   SaveProducto(inputdata:any){
@@ -34,6 +34,10 @@ ar:any;
           console.log(data);        
       })
     );
+  }
+
+  EliminarProducto(id:any){
+    return this.http.delete('/api/product/'+id);
   }
 
 

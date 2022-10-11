@@ -8,7 +8,7 @@ const routes: Routes = [
   {path: 'producto',component:ProductoComponent,children:[
     {path:'',component:ProdlistarComponent},
     {path:'prodadicionar',component:ProdadicionarComponent},
-    //{path:'prodeditar/:id',component:ProdadicionarComponent},
+    {path:'prodeditar/:id',component:ProdadicionarComponent},
 
   ]},
 ];

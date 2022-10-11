@@ -39,6 +39,29 @@ app.get('/product', async (req, res) => {
   res.json(entities)
 })
 
+app.get('/product/:id', async (req, res) => {
+  const { id} = req.body
+  const entity = await prisma.product.findUnique({
+    where: {
+      id
+    } 
+  });
+  res.json(entity)
+})
+
+app.post('/product/:id', async (req, res) => {
+  const { id,code,name } = req.params
+  const entity = await prisma.product.update({
+    where: {
+      id,
+    },
+    data:{
+      code,name,
+    },
+  })
+  res.json(entity)
+})
+
 app.post('/product', async (req, res) => {
   const { code, name } = req.body
   const entity = await prisma.product.create({
