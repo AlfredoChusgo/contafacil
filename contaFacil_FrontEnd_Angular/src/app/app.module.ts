@@ -11,6 +11,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from 'src/MaterialModule';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegcontableComponent } from './GRegContable/regcontable/regcontable.component';
+import { ListaregcontableComponent } from './GRegContable/listaregcontable/listaregcontable.component';
+import { AdicionaregcontableComponent } from './GRegContable/adicionaregcontable/adicionaregcontable.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProductoComponent,
     ProdlistarComponent,
     ProdadicionarComponent,
+    RegcontableComponent,
+    ListaregcontableComponent,
+    AdicionaregcontableComponent,
   ],
   imports: [
     BrowserModule,

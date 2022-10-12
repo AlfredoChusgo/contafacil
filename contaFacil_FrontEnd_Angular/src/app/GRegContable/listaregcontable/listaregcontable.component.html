@@ -1,0 +1,44 @@
+<div class="card-box">
+    <div class="row">
+      <div class="col-sm-4">
+        <a routerLink="#" id="addbtn"  class="btn btn-success btn-rounded">Nuevo Registro Contable</a>
+    </div>
+  </div>
+  <br>
+    
+    <div class="row">
+              <div class="table-responsive">
+                  
+                    <table class="scrolling-container table table-bordered" id="datatable" role="grid" >
+                      <thead class="bg-primary text-white">
+                          <tr role="row">
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Monto</th>
+                            <th>Tipo</th>
+                            <th>Usuario</th>
+                            <th>Empresa</th>
+                            <th>Producto</th>
+                            <th>Acción</th>
+                            </tr>
+                      </thead>
+                      <tbody>
+                        
+<tr *ngFor="let item of lregcontabledata">
+<td>{{item.id}}</td>
+<td>{{item.date}}</td>
+<td>{{item.total}}</td>
+<td>{{item.recordType}}</td>
+<td>{{item.userId}}</td>
+<td>{{item.companyId}}</td>
+<td>{{item.productId}}</td>
+<td>
+    <button routerLink="regeditar/{{item.id}}" class="btn btn-primary">Edit</button> | <button (click)="delete(item.id)" class="btn btn-danger">Delete</button>  
+</td>
+</tr>
+                      </tbody>
+                  </table>
+                
+              </div>
+          </div>
+        </div>
