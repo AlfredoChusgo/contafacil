@@ -12,11 +12,12 @@ app.use(cors());
 app.use(express.json())
 
 app.delete('/user/:id', async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
+  const idNumber = Number(id);
   const user = await prisma.user.delete({
     where: {
-      id:+id,
-    },
+      id:idNumber,
+    }
   })
   res.json(user)
 })
@@ -91,6 +92,19 @@ app.get('/company', async (req, res) => {
   res.json(entities)
 })
 
+app.put('/company/', async (req, res) => {
+  const { id,nit,name } = req.body
+  const entity = await prisma.company.update({
+    where: {
+      id:+id,
+    },
+    data:{
+      nit,name,
+    },
+  })
+  res.json(entity)
+})
+
 app.post('/company', async (req, res) => {
   const { nit, name } = req.body
   const entity = await prisma.company.create({
@@ -102,6 +116,17 @@ app.post('/company', async (req, res) => {
   res.json(entity)
 })
 
+app.delete('/company/:id', async (req, res) => {
+  const { id } = req.params;
+  const idNumber = Number(id);
+  const company = await prisma.company.delete({
+    where: {
+      id:idNumber,
+    },
+  })
+  res.json(company)
+})
+
 app.get('/accountingRecord', async (req, res) => {
   const entities = await prisma.accountingRecord.findMany({
     include: {
@@ -111,6 +136,17 @@ app.get('/accountingRecord', async (req, res) => {
     },
   })
   res.json(entities)
+})
+
+app.delete('/accountingRecord/:id', async (req, res) => {
+  const { id } = req.params;
+  const idNumber = Number(id);
+  const accountingRecord = await prisma.accountingRecord.delete({
+    where: {
+      id:idNumber,
+    },
+  })
+  res.json(accountingRecord)
 })
 
 app.post('/accountingRecord', async (req, res) => {
