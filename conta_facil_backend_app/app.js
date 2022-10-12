@@ -99,7 +99,13 @@ app.post('/company', async (req, res) => {
 })
 
 app.get('/accountingRecord', async (req, res) => {
-  const entities = await prisma.accountingRecord.findMany();
+  const entities = await prisma.accountingRecord.findMany({
+    include: {
+      user: true,
+      product: true,
+      company:true,
+    },
+  })
   res.json(entities)
 })
 
