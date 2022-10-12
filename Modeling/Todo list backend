@@ -1,0 +1,15 @@
+-create update product
+-create update company
+-create update user
+-create update accountRecord
+
+-create delete product
+-create delete company
+-create delete user
+-create delete accountRecord
+
+-create utilities report between dates /completed
+
+
+
+

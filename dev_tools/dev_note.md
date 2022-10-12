@@ -20,4 +20,4 @@ authentication //pending
 
 # terminology 
 incoming = ingreso
-dispatched = egreso
+outgoing = egreso
