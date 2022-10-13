@@ -1,0 +1,159 @@
+
+<div class="card-box">
+    <form [formGroup]="form" (ngSubmit)="guardarRegistro()">
+        <div class="row" style="text-align: center;display: block;">
+            <h2>Nuevo Producto</h2>
+        </div>
+
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6">
+                <div class="form-group">
+                    <label for="txtcode">Id</label>
+                    <input type="text" id="txtid" class="form-control" formControlName="id" autocomplete="off"  />
+                </div>
+            </div> 
+        </div>
+        <!-- <div class="row">
+            <div class="offset-lg-3 col-lg-6">
+                <div class="form-group">
+                     <label>Fecha</label> 
+                   <input type="text" class="form-control" formControlName="date"  value="{{datetime}}" /> 
+                    <span *ngIf="date && date.invalid && date.touched" class="error">Por favor ingresar Fecha</span> 
+                    
+                </div>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6">
+                <div class="form-group">
+                     <label>Monto</label>
+                   <input type="text" class="form-control" formControlName="total" autocomplete="off" /> 
+                    <span *ngIf="total && total.invalid && total.touched" class="error">Por favor ingresar Monto</span> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6">
+                <div class="form-group">
+                     <label>Tipo</label>
+                     <select class="form-control" formControlName="recordType"  >
+                        
+                       <option >Ingreso</option> 
+                       <option >Egreso</option> 
+                       <option >Gasto</option> 
+                       
+                   </select>
+                   <span *ngIf="recordType && recordType.invalid && recordType.touched" class="error">Por favor ingresar Tipo</span> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6">
+                <div class="form-group">
+                     <label>Usuario</label>
+                   <input type="text" class="form-control" formControlName="userId" autocomplete="off" /> 
+                    <span *ngIf="userId && userId.invalid && userId.touched" class="error">Por favor ingresar Tipo</span> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6">
+                <div class="form-group">
+                     <label>Empresa</label>
+                   <input type="text" class="form-control" formControlName="companyId" autocomplete="off" /> 
+                    <span *ngIf="companyId && companyId.invalid && companyId.touched" class="error">Por favor ingresar Tipo</span> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6">
+                <div class="form-group">
+                    <label>Producto</label>
+                    <select class="form-control" formControlName="productId">
+                         
+                        <option *ngFor="let item of productosData" value="{{item.id}}">
+                            {{item.name}}
+                        </option> 
+                    </select>
+                     <span *ngIf="productId && productId.invalid && productId.touched" class="error">Por favor seleccionar Producto</span> 
+                </div>
+            </div>
+        </div>
+        
+<!--
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" formControlName="email" autocomplete="off" /> 
+                    <span *ngIf="email && email.invalid && email.touched" class="error">Please enter valid email</span> 
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6">
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" class="form-control" formControlName="phone" autocomplete="off" />
+                    <span *ngIf="phone && phone.invalid && phone.touched" class="error">Please enter phone</span> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6">
+                <div class="form-group">
+                    <label>Designation</label>
+                    <select class="form-control" formControlName="designation">
+                         <option value="">Select</option>
+                        <option *ngFor="let item of desigantiondata" value="{{item.code}}">
+                            {{item.name}}
+                        </option> 
+                    </select>
+                     <span *ngIf="designation && designation.invalid && designation.touched" class="error">Please enter designation</span> 
+                </div>
+            </div>
+        </div>-->
+
+        <div class="row">
+            <div class="offset-lg-3 col-lg-2">
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Guardar</button>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <br>
+                 <span class={{messageclass}}>{{message }}</span> 
+            </div>
+        </div>    <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+         </script>
+
+    </form>
+
+
+</div>
+
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<! - archivo jQuery. Asegúrese de introducir antes de bootstrap.min.js ->
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<! - Formato de hora ->
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
+<!--datetimepicker-->
+<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+      rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+<script>
+  $(function () {
+// Configurar datetimepicker
+    $('#startTimePicker').datetimepicker({
+      format: 'YYYY-MM-DD HH:mm:ss',
+      locale: moment.locale('zh-cn'),
+    });
+  });
+</script>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductoService } from 'src/app/service/producto.service';
-import { productomodel } from '../model/productomodel';
 
 @Component({
   selector: 'app-prodlistar',

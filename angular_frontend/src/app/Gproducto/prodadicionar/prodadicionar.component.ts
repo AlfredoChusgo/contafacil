@@ -9,7 +9,7 @@ import { ProductoService } from 'src/app/service/producto.service';
   templateUrl: './prodadicionar.component.html',
   styleUrls: ['./prodadicionar.component.scss']
 })
-export class ProdadicionarComponent implements OnInit {
+export class ProdadicionarComponent implements OnInit { 
   saveresp:any;
   message='';
   messageclass='';
