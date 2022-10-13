@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 const app = express()
 
 var allowedOrigins = ['http://localhost:4200',
-                      'http://yourapp.com'];
+                      'https://frontend-angular-conta-facil.mybluemix.net'];
 
 app.use(cors({
   origin: function(origin, callback){
