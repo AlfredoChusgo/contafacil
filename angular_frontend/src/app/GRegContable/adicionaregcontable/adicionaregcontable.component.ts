@@ -20,10 +20,10 @@ export class AdicionaregcontableComponent implements OnInit {
   datetime:any;
 
   constructor(private servRegConta:RegContableService, private servProducto:ProductoService, private route: ActivatedRoute) { 
-    // this.regContaID = this.route.snapshot.paramMap.get('id');
-    // if(this.regContaID != null && this.regContaID != 0){
-    //   this.
-    // }
+    this.regContaID = this.route.snapshot.paramMap.get('id');
+    if(this.regContaID != null && this.regContaID != 0){
+      this.actualizarRegContable(this.productId);
+    }
     this.cargarProductos();
     //this.datetime=formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a','eN-US');
   }
@@ -119,6 +119,23 @@ export class AdicionaregcontableComponent implements OnInit {
         productId: new FormControl("")
       })
   }
+
+  actualizarRegContable(id:any){
+    this.servRegConta.RegContableByCode(id).subscribe(data=>{
+      this.editdata=data;
+      if(this.editdata != null){
+          this.form = new FormGroup({
+            id: new FormControl(this.editdata.id),
+            date: new FormControl(this.editdata.date),
+            total: new FormControl(this.editdata.total),
+            recordType: new FormControl(this.editdata.recordType),
+            userId: new FormControl(this.editdata.userId),
+            companyId: new FormControl(this.editdata.companyId),
+            productId: new FormControl(this.editdata.productId)
+          })
+      } 
+    })
+}
 
   get date(){
     return this.form.get('date');

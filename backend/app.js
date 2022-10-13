@@ -127,6 +127,16 @@ app.delete('/company/:id', async (req, res) => {
   res.json(company)
 })
 
+app.get('/accountingRecord/:id', async (req, res) => {
+  const { id} = req.params
+  const entity = await prisma.accountingRecord.findUnique({
+    where: {
+      id:+id
+    } 
+  });
+  res.json(entity)
+})
+
 app.get('/accountingRecord', async (req, res) => {
   const entities = await prisma.accountingRecord.findMany({
     include: {

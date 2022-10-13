@@ -20,6 +20,10 @@ export class RegContableService {
     return this.http.get(this.apiurl+'/accountingRecord');
   }
 
+  RegContableByCode(id:Number):Observable<any>{
+    return this.http.get(this.apiurl+'/accountingRecord/'+id);
+  }
+
   SaveRegistro(data:any){
     return this.http.post(this.apiurl+'/accountingRecord',data).pipe(
       tap((data)=>{
