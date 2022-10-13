@@ -1,0 +1,33 @@
+-documentacion
+    -Alfredo
+    Título
+    Introducción
+    Problemática
+    Objetivo
+    Metodología aplicada
+    Herramientas usadas (Gestión de la configuración) -Alfredo
+    Proceso de desarrollo de software --roger
+    Captura de requisitos
+    Análisis y especificación de requisitos
+    Diseño de la arquitectura 
+    Implementación 
+    Pruebas
+    Despliegue 
+    Mantenimiento
+    Conclusiones
+    Referencias
+    manual de usuario
+
+
+backend:
+    test
+    despliegue
+front end:
+    angular:
+        algunas historias         
+        Test
+        despliegue
+
+CI/CD
+Agregar descripcion a las historias de usuario
+Poblar la base de datos
