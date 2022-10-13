@@ -176,6 +176,24 @@ app.post('/accountingRecord', async (req, res) => {
   res.json(entity)
 })
 
+app.put('/accountingRecord/', async (req, res) => {
+  const { id,date, total,recordType,userId,companyId,productId } = req.body
+  const entity = await prisma.company.update({
+    where: {
+      id:+id,
+    },
+    data: {
+      date: prismaDate,
+      total:+total,
+      recordType:recordType,
+      userId:+userId,
+      companyId:+companyId,
+      productId:+productId
+    },
+  })
+  res.json(entity)
+})
+
 app.get('/accountingRecords', async (req, res) => {
   const entities = await prisma.accountingRecord.findMany({
     where:{

@@ -34,7 +34,7 @@ export class RegContableService {
   }
 
   UpdateRegistro(data:any){
-    return this.http.post(this.apiurl+'/editaccountingRecord/',data).pipe(
+    return this.http.put(this.apiurl+'/editaccountingRecord/',data).pipe(
       tap((data)=>{
         this.refreshrequired.next()
           console.log(data);        
