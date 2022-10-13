@@ -1,7 +1,7 @@
 <div class="card-box">
     <div class="row">
       <div class="col-sm-4">
-        <a routerLink="#" id="addbtn"  class="btn btn-success btn-rounded">Nuevo Registro Contable</a>
+        <a routerLink="addregistrocontable" id="addbtn"  class="btn btn-success btn-rounded">Nuevo Registro Contable</a>
     </div>
   </div>
   <br>
@@ -29,9 +29,9 @@
 <td>{{item.date}}</td>
 <td>{{item.total}}</td>
 <td>{{item.recordType}}</td>
-<td>{{item.userId}}</td>
-<td>{{item.companyId}}</td>
-<td>{{item.productId}}</td>
+<td>{{item.user.userName}}</td>
+<td>{{item.company.name}}</td>
+<td>{{item.product.name}}</td>
 <td>
     <button routerLink="regeditar/{{item.id}}" class="btn btn-primary">Edit</button> | <button (click)="delete(item.id)" class="btn btn-danger">Delete</button>  
 </td>

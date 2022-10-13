@@ -1,6 +1,9 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RegContableservRegConta } from 'src/app/servRegConta/reg-contable.servRegConta';
+
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProductoService } from 'src/app/service/producto.service';
+import { RegContableService } from 'src/app/service/reg-contable.service';
 
 @Component({
   selector: 'app-adicionaregcontable',
@@ -13,8 +16,13 @@ export class AdicionaregcontableComponent implements OnInit {
   messageclass='';
   editdata:any;
   regContaID:any;
+  productosData:any;
+  datetime:any;
 
-  constructor(private servRegConta:RegContableservRegConta) { }
+  constructor(private servRegConta:RegContableService, private servProducto:ProductoService) { 
+    this.cargarProductos();
+    this.datetime=formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a','eN-US');
+  }
 
 
   ngOnInit(): void { 
@@ -30,8 +38,19 @@ export class AdicionaregcontableComponent implements OnInit {
     productId: new FormControl('', Validators.required)
   });
 
-  guardarProducto() { 
+  cargarProductos(){
+    this.servProducto.LoadAllProductos().subscribe(
+      result =>{
+        this.productosData=result;
+      }
+    )
+
+  }
+
+  guardarRegistro() { 
+    this.datetime=formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a','eN-US');
     if (this.form.valid) {
+      this.form.setValue({date:this.datetime});
       if(this.regContaID ==null){console.log('not null'+this.regContaID)
         this.servRegConta.SaveRegistro(this.form.value).subscribe(
           result => { 
@@ -83,4 +102,36 @@ export class AdicionaregcontableComponent implements OnInit {
     }
   }
 
+  limpiarform(){
+      this.form= new FormGroup({
+        id: new FormControl(""),
+        date: new FormControl(""),
+        total: new FormControl(""),
+        recordType: new FormControl(""),
+        userId: new FormControl(""),
+        companyId: new FormControl(""),
+        productId: new FormControl("")
+      })
+  }
+
+  get date(){
+    return this.form.get('date');
+  }
+  get total(){
+    return this.form.get('total');
+  }
+  get recordType(){
+    return this.form.get('recordType');
+  }
+  get userId(){
+    return this.form.get('userId');
+  }
+  get companyId(){
+    return this.form.get('companyId');
+  }
+  get productId(){
+    return this.form.get('productId');
+  }
+
 }
+
