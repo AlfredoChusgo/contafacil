@@ -8,7 +8,7 @@ import {  tap } from 'rxjs/operators';
 })
 export class ProductoService {
 
- apiurl='https://conta-facil.mybluemix.net';
+ apiurl='https://backend-expressjs-conta-facil.mybluemix.net';
   private refreshrequired= new Subject<void>();
   constructor(private http:HttpClient) {   } 
 
