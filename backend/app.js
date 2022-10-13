@@ -156,11 +156,11 @@ app.post('/accountingRecord', async (req, res) => {
   const entity = await prisma.accountingRecord.create({
     data: {
       date: prismaDate,
-      total:total,
+      total:+total,
       recordType:recordType,
-      userId:userId,
-      companyId:companyId,
-      productId:productId
+      userId:+userId,
+      companyId:+companyId,
+      productId:+productId
     },
   })
   res.json(entity)
