@@ -36,8 +36,14 @@
             <div class="offset-lg-3 col-lg-6">
                 <div class="form-group">
                      <label>Tipo</label>
-                   <input type="text" class="form-control" formControlName="recordType" autocomplete="off" /> 
-                    <span *ngIf="recordType && recordType.invalid && recordType.touched" class="error">Por favor ingresar Tipo</span> 
+                     <select class="form-control" formControlName="recordType"  >
+                        
+                       <option >Ingreso</option> 
+                       <option >Egreso</option> 
+                       <option >Gasto</option> 
+                       
+                   </select>
+                   <span *ngIf="recordType && recordType.invalid && recordType.touched" class="error">Por favor ingresar Tipo</span> 
                 </div>
             </div>
         </div>
@@ -64,7 +70,7 @@
                 <div class="form-group">
                     <label>Producto</label>
                     <select class="form-control" formControlName="productId">
-                         <option value="">Select</option>
+                         
                         <option *ngFor="let item of productosData" value="{{item.id}}">
                             {{item.name}}
                         </option> 

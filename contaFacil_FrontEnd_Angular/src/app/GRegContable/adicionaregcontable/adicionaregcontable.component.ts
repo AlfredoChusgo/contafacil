@@ -21,7 +21,7 @@ export class AdicionaregcontableComponent implements OnInit {
 
   constructor(private servRegConta:RegContableService, private servProducto:ProductoService) { 
     this.cargarProductos();
-    this.datetime=formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a','eN-US');
+    //this.datetime=formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a','eN-US');
   }
 
 
@@ -30,7 +30,7 @@ export class AdicionaregcontableComponent implements OnInit {
 
   form = new FormGroup({
     id: new FormControl({ value: '', disabled: true }),
-    date: new FormControl('', Validators.required),
+    //date: new FormControl('', Validators.required),
     total: new FormControl('', Validators.required),
     recordType: new FormControl('', Validators.required),
     userId: new FormControl('', Validators.required),
@@ -48,10 +48,12 @@ export class AdicionaregcontableComponent implements OnInit {
   }
 
   guardarRegistro() { 
-    this.datetime=formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a','eN-US');
-    if (this.form.valid) {
-      this.form.setValue({date:this.datetime});
-      if(this.regContaID ==null){console.log('not null'+this.regContaID)
+  //  this.datetime=new Date().toISOString();//formatDate(new Date().toISOString(), 'dd-MM-yyyy hh:mm:ss a','eN-US');
+   // this.form.controls['date'].setValue(this.datetime);
+    
+    if (this.form.valid) {      
+      if(this.regContaID == null || this.regContaID == undefined){
+        console.log('not null'+this.regContaID);
         this.servRegConta.SaveRegistro(this.form.value).subscribe(
           result => { 
             if(result != null){    
@@ -59,7 +61,7 @@ export class AdicionaregcontableComponent implements OnInit {
                 if (this.saveresp.message != 'added') {
                   this.message = "Guardado Correctamente."
                   this.messageclass = 'sucess'
-                  //this.limpiarform()
+                  this.limpiarform()
   
                 } else if(this.saveresp.message == 'updated'){
                   this.message = "Actualizado correctamente."
@@ -105,7 +107,7 @@ export class AdicionaregcontableComponent implements OnInit {
   limpiarform(){
       this.form= new FormGroup({
         id: new FormControl(""),
-        date: new FormControl(""),
+        //date: new FormControl(""),
         total: new FormControl(""),
         recordType: new FormControl(""),
         userId: new FormControl(""),
