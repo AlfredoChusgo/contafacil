@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx prisma migrate dev --name init --create-only && npx prisma migrate deploy && node app.js"
+    "start": "node app.js"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
