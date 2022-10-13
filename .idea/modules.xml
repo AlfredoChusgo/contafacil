@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/conta_facil.iml" filepath="$PROJECT_DIR$/.idea/conta_facil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flutter_frontend/flutter_frontend.iml" filepath="$PROJECT_DIR$/flutter_frontend/flutter_frontend.iml" />
     </modules>
   </component>
 </project>
