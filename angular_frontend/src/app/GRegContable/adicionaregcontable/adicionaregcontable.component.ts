@@ -30,7 +30,7 @@ export class AdicionaregcontableComponent implements OnInit {
 
   form = new FormGroup({
     id: new FormControl({ value: '', disabled: true }),
-    //date: new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required),
     total: new FormControl('', Validators.required),
     recordType: new FormControl('', Validators.required),
     userId: new FormControl('', Validators.required),
@@ -48,8 +48,8 @@ export class AdicionaregcontableComponent implements OnInit {
   }
 
   guardarRegistro() { 
-  //  this.datetime=new Date().toISOString();//formatDate(new Date().toISOString(), 'dd-MM-yyyy hh:mm:ss a','eN-US');
-   // this.form.controls['date'].setValue(this.datetime);
+   this.datetime=new Date().toISOString();//formatDate(new Date().toISOString(), 'dd-MM-yyyy hh:mm:ss a','eN-US');
+   this.form.controls['date'].setValue(this.datetime);
     
     if (this.form.valid) {      
       if(this.regContaID == null || this.regContaID == undefined){
@@ -107,7 +107,7 @@ export class AdicionaregcontableComponent implements OnInit {
   limpiarform(){
       this.form= new FormGroup({
         id: new FormControl(""),
-        //date: new FormControl(""),
+        date: new FormControl(""),
         total: new FormControl(""),
         recordType: new FormControl(""),
         userId: new FormControl(""),

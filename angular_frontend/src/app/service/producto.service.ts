@@ -10,7 +10,7 @@ export class ProductoService {
 
  // apiurl='http://localhost:3000/api';
   private refreshrequired= new Subject<void>();
-  constructor(private http:HttpClient) {   }
+  constructor(private http:HttpClient) {   } 
 
 get Refreshrequired(){
   return this.refreshrequired;

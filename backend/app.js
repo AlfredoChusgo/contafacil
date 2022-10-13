@@ -158,9 +158,9 @@ app.post('/accountingRecord', async (req, res) => {
       date: prismaDate,
       total:+total,
       recordType:recordType,
-      userId:+userId,
-      companyId:+companyId,
-      productId:+productId
+      userId:userId,
+      companyId:companyId,
+      productId:productId
     },
   })
   res.json(entity)
