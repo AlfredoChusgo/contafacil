@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -50,7 +53,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  void _incrementCounter() async {
+    final response = await http.get(
+      Uri.http('localhost:3000', '/user'),
+      headers: {"Content-Type": "application/json"},
+      // body: jsonEncode({"userName": "edson", "password": "password"}),
+    );
+    print(response.body);
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
