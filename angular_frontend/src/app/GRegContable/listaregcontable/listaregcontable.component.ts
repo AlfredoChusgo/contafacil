@@ -39,8 +39,12 @@ export class ListaregcontableComponent implements OnInit {
       })
   }
 
-  delete(id:any){
-
+  delete(id: any) {
+    if (confirm("Eliminar Registro Contable Permanentemente?")) {
+      this.servRegConta.EliminarRegContable(id).subscribe(result => {
+        this.LoadAll();
+      });
+    }
   }
 
 }

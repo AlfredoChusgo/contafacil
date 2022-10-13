@@ -1,7 +1,7 @@
-import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from 'src/app/service/producto.service';
 import { RegContableService } from 'src/app/service/reg-contable.service';
 
@@ -19,7 +19,11 @@ export class AdicionaregcontableComponent implements OnInit {
   productosData:any;
   datetime:any;
 
-  constructor(private servRegConta:RegContableService, private servProducto:ProductoService) { 
+  constructor(private servRegConta:RegContableService, private servProducto:ProductoService, private route: ActivatedRoute) { 
+    // this.regContaID = this.route.snapshot.paramMap.get('id');
+    // if(this.regContaID != null && this.regContaID != 0){
+    //   this.
+    // }
     this.cargarProductos();
     //this.datetime=formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a','eN-US');
   }

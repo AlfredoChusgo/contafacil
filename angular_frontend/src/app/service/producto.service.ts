@@ -8,7 +8,7 @@ import {  tap } from 'rxjs/operators';
 })
 export class ProductoService {
 
- // apiurl='http://localhost:3000/api';
+ apiurl='https://conta-facil.mybluemix.net';
   private refreshrequired= new Subject<void>();
   constructor(private http:HttpClient) {   } 
 
@@ -17,15 +17,15 @@ get Refreshrequired(){
 }
 
    LoadAllProductos():Observable<any>{
-    return this.http.get('/api/product');
+    return this.http.get(this.apiurl+'/product');
   }
 
   ProductoByCode(id:Number):Observable<any>{
-    return this.http.get('/api/product/'+id);
+    return this.http.get(this.apiurl+'/product/'+id);
   }
 ar:any;
   SaveProducto(inputdata:any){
-    return this.http.post('/api/product',inputdata).pipe(
+    return this.http.post(this.apiurl+'/product',inputdata).pipe(
       tap((data)=>{
         this.refreshrequired.next()
           console.log(data);        
@@ -33,7 +33,7 @@ ar:any;
     );
   }
   UpdateProducto(data:any){
-    return this.http.post('/api/editproduct/',data).pipe(
+    return this.http.post(this.apiurl+'/editproduct/',data).pipe(
       tap((data)=>{
         this.refreshrequired.next()
           console.log(data);        
@@ -42,7 +42,7 @@ ar:any;
   }
 
   EliminarProducto(id:any){
-    return this.http.delete('/api/product/'+id);
+    return this.http.delete(this.apiurl+'/product/'+id);
   }
 
 
