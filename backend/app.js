@@ -127,6 +127,16 @@ app.delete('/company/:id', async (req, res) => {
   res.json(company)
 })
 
+app.get('/accountingRecord/:id', async (req, res) => {
+  const { id} = req.params
+  const entity = await prisma.accountingRecord.findUnique({
+    where: {
+      id:+id
+    } 
+  });
+  res.json(entity)
+})
+
 app.get('/accountingRecord', async (req, res) => {
   const entities = await prisma.accountingRecord.findMany({
     include: {
@@ -154,6 +164,24 @@ app.post('/accountingRecord', async (req, res) => {
   //date should be in isoTimestamp
   const prismaDate = new Date(date)
   const entity = await prisma.accountingRecord.create({
+    data: {
+      date: prismaDate,
+      total:+total,
+      recordType:recordType,
+      userId:+userId,
+      companyId:+companyId,
+      productId:+productId
+    },
+  })
+  res.json(entity)
+})
+
+app.put('/accountingRecord/', async (req, res) => {
+  const { id,date, total,recordType,userId,companyId,productId } = req.body
+  const entity = await prisma.company.update({
+    where: {
+      id:+id,
+    },
     data: {
       date: prismaDate,
       total:+total,

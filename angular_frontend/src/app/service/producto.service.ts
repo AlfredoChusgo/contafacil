@@ -33,7 +33,7 @@ ar:any;
     );
   }
   UpdateProducto(data:any){
-    return this.http.post(this.apiurl+'/editproduct/',data).pipe(
+    return this.http.put(this.apiurl+'/product/',data).pipe(
       tap((data)=>{
         this.refreshrequired.next()
           console.log(data);        
