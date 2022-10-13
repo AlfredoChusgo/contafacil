@@ -32,7 +32,7 @@ export class ProdlistarComponent implements OnInit {
   delete(id: any) {
     if (confirm("Eliminar Producto Permanentemente?")) {
       this.service.EliminarProducto(id).subscribe(result => {
-        this.LoadAll(); console.log(result)
+        this.LoadAll(); 
       });
     }
   }
