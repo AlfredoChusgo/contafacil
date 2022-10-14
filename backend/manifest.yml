@@ -1,5 +1,0 @@
-applications:
-- name: node-conta-facil
-  memory: 128M
-  buildpack: nodejs_buildpack
-
