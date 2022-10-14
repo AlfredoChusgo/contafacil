@@ -37,11 +37,8 @@
                 <div class="form-group">
                      <label>Tipo</label>
                      <select class="form-control" formControlName="recordType"  >
-                        
-                       <option >Ingreso</option> 
-                       <option >Egreso</option> 
-                       <option >Gasto</option> 
-                       
+                       <option >incoming</option> 
+                       <option >outgoing</option> 
                    </select>
                    <span *ngIf="recordType && recordType.invalid && recordType.touched" class="error">Por favor ingresar Tipo</span> 
                 </div>
