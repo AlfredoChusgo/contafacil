@@ -53,11 +53,16 @@ export class RegContableService {
     return this.http.delete(this.apiurl+'/accountingRecord/'+id);
   }
 
-  GetExcelFileLink(startDate:Date,endDate:Date){
-    let stringStartDate:string = new Date(startDate).toISOString();
-    let stringEndDate:string = new Date(endDate).toISOString();
-    let url = this.apiurl+`/accountingRecordsExcel?startDate=${stringStartDate}&endDate=${stringEndDate}`;
-    return url;
+  GetExcelFileLink(startDate: Date, endDate: Date) {
+    try {
+      let stringStartDate: string = new Date(startDate).toISOString();
+      let stringEndDate: string = new Date(endDate).toISOString();
+      let url = this.apiurl + `/accountingRecordsExcel?startDate=${stringStartDate}&endDate=${stringEndDate}`;
+      return url;
+    } catch (error) {
+      return "#";
+    }
+
   }
   
 }
