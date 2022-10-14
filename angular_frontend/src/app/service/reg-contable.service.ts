@@ -8,6 +8,7 @@ import {  tap } from 'rxjs/operators';
 })
 export class RegContableService {
   apiurl='https://backend-expressjs-conta-facil.mybluemix.net';
+  //apiurl='http://localhost:3000';
   private refreshrequired= new Subject<void>();
 
   constructor(private http:HttpClient) { }
@@ -18,6 +19,12 @@ export class RegContableService {
 
   LoadAllRegContable():Observable<any>{
     return this.http.get(this.apiurl+'/accountingRecord');
+  }
+
+  LoadAllRegContableByDate(startDate:Date,endDate:Date):Observable<any>{
+    let stringStartDate:string = new Date(startDate).toISOString();
+    let stringEndDate:string = new Date(endDate).toISOString();
+    return this.http.get(this.apiurl+`/accountingRecords?startDate=${stringStartDate}&endDate=${stringEndDate}`);
   }
 
   RegContableByCode(id:Number):Observable<any>{
@@ -46,6 +53,11 @@ export class RegContableService {
     return this.http.delete(this.apiurl+'/accountingRecord/'+id);
   }
 
-
+  GetExcelFileLink(startDate:Date,endDate:Date){
+    let stringStartDate:string = new Date(startDate).toISOString();
+    let stringEndDate:string = new Date(endDate).toISOString();
+    let url = this.apiurl+`/accountingRecordsExcel?startDate=${stringStartDate}&endDate=${stringEndDate}`;
+    return url;
+  }
   
 }
