@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_frontend/accounting_records/accounting_records_screen.dart';
+import 'package:flutter_frontend/companys/CompanyCreateScreen.dart';
 import 'package:flutter_frontend/companys/company_screen.dart';
 import 'package:flutter_frontend/products/product_create_screen.dart';
 import 'package:flutter_frontend/products/product_screen.dart';
@@ -31,10 +32,12 @@ class MyApp extends StatelessWidget {
 
         ///Product Screen
         const ProductScreen().routeName: (context) => const ProductScreen(),
-        ProductCreateScreen().routeName: (context) => ProductCreateScreen(),
+        const ProductCreateScreen().routeName: (context) => const ProductCreateScreen(),
 
         ///Company Screen
         const CompanyScreen().routeName: (context) => const CompanyScreen(),
+        const CompanyCreateScreen().routeName: (context) => const CompanyCreateScreen(),
+
 
         ///Accounting Records Screen
         const AccountingRecordsScreen().routeName: (context) => const AccountingRecordsScreen(),

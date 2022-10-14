@@ -32,7 +32,6 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
           width: 500,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text('Product'),
               Padding(
@@ -89,7 +88,7 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
                         Utils().snackBarWidget(context,
                             message: 'code or name is empty');
                       },
-                      child: const Text('actualizar'),
+                      child: const Text('Update'),
                     )
             ],
           ),

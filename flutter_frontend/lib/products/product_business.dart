@@ -10,7 +10,6 @@ class ProductBusiness {
       final response = await http.get(
         Uri.http(ApiService().root, '/product'),
         headers: {"Content-Type": "application/json"},
-        // body: jsonEncode({"userName": "edson", "password": "password"}),
       );
       print('********ProductBusiness: ${jsonDecode(response.body)}');
       List<ProductModel> listResponse = [];
@@ -42,7 +41,7 @@ class ProductBusiness {
 
   Future<ProductModel> productDelete({required int productId}) async {
     try {
-      final response = await http.post(
+      final response = await http.delete(
         Uri.http(ApiService().root, '/product/$productId'),
         headers: {
           "Access-Control-Allow-Origin": "*",
