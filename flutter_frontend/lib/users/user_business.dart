@@ -15,7 +15,7 @@ class UserBusiness {
           'Accept': '*/*'
         },
       );
-      List<UserModel> listResponse=[];
+      List<UserModel> listResponse = [];
       (jsonDecode(response.body) as List).forEach((element) {
         listResponse.add(userModelFromJson(jsonEncode(element)));
       });
@@ -25,20 +25,16 @@ class UserBusiness {
     }
   }
 
-  Future<UserModel> userCreate({required String user, required String password}) async {
+  Future<UserModel> userCreate(
+      {required String user, required String password}) async {
     try {
-      final response = await http.post(
-        Uri.https(ApiService().root, '/user'),
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          'Content-Type': 'application/json',
-          'Accept': '*/*'
-        },
-        body: jsonEncode({
-          "userName": user,
-          "password": password
-        })
-      );
+      final response = await http.post(Uri.https(ApiService().root, '/user'),
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            'Content-Type': 'application/json',
+            'Accept': '*/*'
+          },
+          body: jsonEncode({"userName": user, "password": password}));
       return userModelFromJson(response.body);
     } catch (e, s) {
       throw Exception('Error: $e ; StackTrace: $s');
@@ -48,16 +44,14 @@ class UserBusiness {
   Future<UserModel> userDelete({required int userId}) async {
     try {
       final response = await http.delete(
-          Uri.https(ApiService().root, '/user/$userId'),
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            'Content-Type': 'application/json',
-            'Accept': '*/*'
-          },
+        Uri.https(ApiService().root, '/user/$userId'),
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
+        },
       );
-      final userModel = userModelFromJson(response.body);
-      print('********UserBusiness: ${userModel.toString()}');
-      return userModel;
+      return userModelFromJson(response.body);
     } catch (e, s) {
       throw Exception('Error: $e ; StackTrace: $s');
     }
