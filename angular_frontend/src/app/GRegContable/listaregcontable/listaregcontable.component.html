@@ -1,44 +1,62 @@
-<div class="card-box">
-    <div class="row">
-      <div class="col-sm-4">
-        <a routerLink="addregistrocontable" id="addbtn"  class="btn btn-success btn-rounded">Nuevo Registro Contable</a>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <a routerLink="addregistrocontable" id="addbtn" class="btn btn-secondary btn-rounded">Nuevo Registro Contable</a>
+    </div>
+    <div class="col-sm-2">
+      <label for="startDate" class="form-label">Fecha Inicio</label>
+      <input [(ngModel)]="startDate" type="date"class="form-control" id="startDate" name="startDate" value="2022-01-01" min="2022-01-01" max="2022-11-01">
+    </div>
+    <div class="col-sm-2">
+      <label for="endDate" class="form-label">Fecha Fin</label>
+      <input [(ngModel)]="endDate" type="date" class="form-control" id="endDate" name="endDate" value="2022-10-01" min="2022-10-01" max="2022-11-01">
+    </div>
+    <div class="col-sm-2">      
+      <button type="button" class="btn btn-dark" (click)="filter()">Filter</button>
+    </div>
+    <div class="col-sm-2">      
+      <a href="{{generateExcelFileLink()}}" target="_blank" class="btn btn-success" (click)="filter()">Download Excel File</a>
     </div>
   </div>
+</div>
+<div class="card-box">
+  
   <br>
-    
-    <div class="row">
-              <div class="table-responsive">
-                  
-                    <table class="scrolling-container table table-bordered" id="datatable" role="grid" >
-                      <thead class="bg-primary text-white">
-                          <tr role="row">
-                            <th>ID</th>
-                            <th>Fecha</th>
-                            <th>Monto</th>
-                            <th>Tipo</th>
-                            <th>Usuario</th>
-                            <th>Empresa</th>
-                            <th>Producto</th>
-                            <th>Acción</th>
-                            </tr>
-                      </thead>
-                      <tbody>
-                        
-<tr *ngFor="let item of lregcontabledata">
-<td>{{item.id}}</td>
-<td>{{item.date}}</td>
-<td>{{item.total}}</td>
-<td>{{item.recordType}}</td>
-<td>{{item.user.userName}}</td>
-<td>{{item.company.name}}</td>
-<td>{{item.product.name}}</td>
-<td>
-    <button routerLink="regeditar/{{item.id}}" class="btn btn-primary">Edit</button> | <button (click)="delete(item.id)" class="btn btn-danger">Delete</button>  
-</td>
-</tr>
-                      </tbody>
-                  </table>
-                
-              </div>
-          </div>
-        </div>
+
+  <div class="row">
+    <div class="table-responsive">
+
+      <table class="scrolling-container table table-bordered" id="datatable" role="grid">
+        <thead class="bg-primary text-white">
+          <tr role="row">
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Tipo</th>
+            <th>Usuario</th>
+            <th>Empresa</th>
+            <th>Producto</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let item of lregcontabledata">
+            <td>{{item.id}}</td>
+            <td>{{item.date}}</td>
+            <td>{{item.total}}</td>
+            <td>{{item.recordType}}</td>
+            <td>{{item.user.userName}}</td>
+            <td>{{item.company.name}}</td>
+            <td>{{item.product.name}}</td>
+            <td>
+              <button routerLink="regeditar/{{item.id}}" class="btn btn-primary">Edit</button> | <button
+                (click)="delete(item.id)" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

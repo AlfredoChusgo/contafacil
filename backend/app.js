@@ -1,14 +1,33 @@
-import express from 'express'
-import cors from 'cors'
-import { PrismaClient } from '@prisma/client'
-import ExcelJS from 'exceljs'
-//import {ExcelJS} from 'exceljs'
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var cors = require('cors');
 
-const prisma = new PrismaClient()
-const app = express()
+
+var indexRouter = require('./routes/index');
+var userRouter = require('./routes/user_router');
+var productRouter = require('./routes/product_router');
+var companyRouter = require('./routes/company_router');
+var accountRecordRouter = require('./routes/account_record_router');
+var accountRecordsRouter = require('./routes/account_records_router');
+var accountRecordsExcelRouter = require('./routes/account_records_excel_router');
+
+var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 var allowedOrigins = ['http://localhost:4200',
-                      'http://yourapp.com'];
+                      'https://frontend-angular-conta-facil.mybluemix.net'];
 
 app.use(cors({
   origin: function(origin, callback){
@@ -24,292 +43,31 @@ app.use(cors({
   }
 }));
 
-app.use(express.json())
+app.use('/', indexRouter);
+app.use('/user', userRouter);
+app.use('/product', productRouter);
+app.use('/company', companyRouter);
+app.use('/accountingRecord', accountRecordRouter);
+app.use('/accountingRecords', accountRecordsRouter);
+app.use('/accountingRecordsExcel', accountRecordsExcelRouter);
 
-app.delete('/user/:id', async (req, res) => {
-  const { id } = req.params;
-  const idNumber = Number(id);
-  const user = await prisma.user.delete({
-    where: {
-      id:idNumber,
-    }
-  })
-  res.json(user)
-})
-
-app.get('/user', async (req, res) => {
-  const entities = await prisma.user.findMany();
-  res.json(entities)
-})
-
-app.post('/user', async (req, res) => {
-  const { userName, password } = req.body
-  const entity = await prisma.user.create({
-    data: {
-      userName,
-      password,
-    },
-  })
-  res.json(entity)
-})
-
-app.get('/product', async (req, res) => {
-  const entities = await prisma.product.findMany();
-  res.json(entities)
-})
-
-app.get('/product/:id', async (req, res) => {
-  const { id} = req.params
-  const entity = await prisma.product.findUnique({
-    where: {
-      id:+id
-    } 
-  });
-  res.json(entity)
-})
-
-app.delete('/product/:id', async (req, res) => {
-  const { id } = req.params
-  const entity = await prisma.product.delete({
-    where: {
-      id:+id,
-    },
-  })
-  res.json(entity)
-})
-
-app.post('/product', async (req, res) => {
-  const { code, name } = req.body
-  const entity = await prisma.product.create({
-    data: {
-      code,
-      name,
-    },
-  })
-  res.json(entity)
-})
-
-app.put('/product/', async (req, res) => {
-  const { id,code,name } = req.body
-  const entity = await prisma.product.update({
-    where: {
-      id:+id,
-    },
-    data:{
-      code,name,
-    },
-  })
-  res.json(entity)
-})
-
-app.get('/company', async (req, res) => {
-  const entities = await prisma.company.findMany();
-  res.json(entities)
-})
-
-app.put('/company/', async (req, res) => {
-  const { id,nit,name } = req.body
-  const entity = await prisma.company.update({
-    where: {
-      id:+id,
-    },
-    data:{
-      nit,name,
-    },
-  })
-  res.json(entity)
-})
-
-app.post('/company', async (req, res) => {
-  const { nit, name } = req.body
-  const entity = await prisma.company.create({
-    data: {
-      nit,
-      name,
-    },
-  })
-  res.json(entity)
-})
-
-app.delete('/company/:id', async (req, res) => {
-  const { id } = req.params;
-  const idNumber = Number(id);
-  const company = await prisma.company.delete({
-    where: {
-      id:idNumber,
-    },
-  })
-  res.json(company)
-})
-
-app.get('/accountingRecord/:id', async (req, res) => {
-  const { id} = req.params
-  const entity = await prisma.accountingRecord.findUnique({
-    where: {
-      id:+id
-    } 
-  });
-  res.json(entity)
-})
-
-app.get('/accountingRecord', async (req, res) => {
-  const entities = await prisma.accountingRecord.findMany({
-    include: {
-      user: true,
-      product: true,
-      company:true,
-    },
-  })
-  res.json(entities)
-})
-
-app.delete('/accountingRecord/:id', async (req, res) => {
-  const { id } = req.params;
-  const idNumber = Number(id);
-  const accountingRecord = await prisma.accountingRecord.delete({
-    where: {
-      id:idNumber,
-    },
-  })
-  res.json(accountingRecord)
-})
-
-app.post('/accountingRecord', async (req, res) => {
-  const { date, total,recordType,userId,companyId,productId } = req.body
-  //date should be in isoTimestamp
-  const prismaDate = new Date(date)
-  const entity = await prisma.accountingRecord.create({
-    data: {
-      date: prismaDate,
-      total:+total,
-      recordType:recordType,
-      userId:+userId,
-      companyId:+companyId,
-      productId:+productId
-    },
-  })
-  res.json(entity)
-})
-
-app.put('/accountingRecord/', async (req, res) => {
-  const { id,date, total,recordType,userId,companyId,productId } = req.body
-  const entity = await prisma.company.update({
-    where: {
-      id:+id,
-    },
-    data: {
-      date: prismaDate,
-      total:+total,
-      recordType:recordType,
-      userId:+userId,
-      companyId:+companyId,
-      productId:+productId
-    },
-  })
-  res.json(entity)
-})
-
-app.get('/accountingRecords', async (req, res) => {
-  const entities = await prisma.accountingRecord.findMany({
-    where:{
-      date:{
-        lte: req.query.endDate,
-        gte: req.query.startDate
-      }
-    },
-    include: {
-      user: true,
-      product: true,
-      company:true,
-    },
-  })
-  res.json(entities)
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
-app.get('/accountingRecordsExcel', async (req, res) => {
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  const workbook = await exportdata(req.query.startDate, req.query.endDate);
-  const fileName = `account_record_${Date.now()}.xlsx`;
-  res.setHeader(
-    "Content-Type",
-    "application/vnd. openxmlformats-officedocument.spreadsheetml.sheet");
-  
-  res.setHeader(
-    "Content-Disposition",
-    `attachment;filename=${fileName}`);
-  return workbook.xlsx.write(res).then(function () {
-    res.status(200).end();
-  });
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
 });
 
-const exportdata = async (startdate,endDate) =>{
-
-  const entities = await prisma.accountingRecord.findMany({
-    where:{
-      date:{
-        lte: endDate,
-        gte: startdate
-      }
-    },
-    include: {
-      user: true,
-      product: true,
-      company:true,
-    },
-  });
-  
-  const workbook = new ExcelJS.Workbook();
-  const worksheet = workbook.addWorksheet('Account Record ', {properties:{tabColor:{argb:'FFC0000'}}});
-  workbook.creator = 'conta_facil';
-  workbook.lastModifiedBy = 'conta_facil';
-  workbook.properties.date1904 = true;
-
-  worksheet.columns = [
-    { header: 'Id', key: 'id', width: 10 },
-    { header: 'Date', key: 'date', width: 15 },
-    { header: 'User Name', key: 'userName', width: 15 },
-    { header: 'Company Name', key: 'companyName', width: 20 },
-    { header: 'Record Type', key: 'recordType', width: 20 },
-    { header: 'Company Nit', key: 'companyNit', width: 15 },
-    { header: 'Product Name', key: 'productName', width: 15 },
-    { header: 'Product Code', key: 'productCode', width: 15 },
-    { header: 'Amount', key: 'amount', width: 15 }
-    ];
-  entities.forEach(async (entity)=>{
-    let total = entity.recordType == 'incoming' ? entity.total : entity.total*-1;
-    worksheet.addRow({ id: entity.id, 
-      date: entity.date, 
-      userName: entity.user.userName, 
-      companyName: entity.company.name,
-      recordType: entity.recordType,
-      companyNit: entity.company.nit,
-      productName:entity.product.name,
-      productCode:entity.product.code,
-      amount:total
-    });
-  });
-  let endRow = entities.length + 2;
-  let totalFormulaCell = worksheet.getCell(`I${endRow}`);
-  let totalLabelCell = worksheet.getCell(`H${endRow}`);
-  totalFormulaCell.value = { formula: `SUM(I2:I${endRow-1})`, date1904: false };
-  totalLabelCell.value = "Total :";
-
-  //formatting
-  let format = {
-    type: 'pattern',
-    pattern:'darkTrellis',
-    fgColor:{argb:'FFFFFF00'},
-    bgColor:{argb:'ffa4ffa4'}
-  };
-  totalFormulaCell.fill = format;
-  totalLabelCell.fill = format;
 
 
-  return workbook;
-};
-
-const port = process.env.PORT || 3000;
-const server = app.listen(port, () => {
-  console.log(`ContaFacil backend app listening on port ${port}`)
-})
+module.exports = app;
 

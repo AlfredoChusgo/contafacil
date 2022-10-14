@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_frontend/accounting_records/accounting_records_screen.dart';
 import 'package:flutter_frontend/companys/company_screen.dart';
+import 'package:flutter_frontend/products/product_create_screen.dart';
 import 'package:flutter_frontend/products/product_screen.dart';
+import 'package:flutter_frontend/users/user_create_screen.dart';
 import 'package:flutter_frontend/users/user_screen.dart';
 
 void main() {
@@ -21,11 +23,20 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      initialRoute: const ProductScreen().routeName,
+      initialRoute: const UserScreen().routeName,
       routes: {
-        const ProductScreen().routeName: (context) => const ProductScreen(),
+        ///User Screen
         const UserScreen().routeName: (context) => const UserScreen(),
+        UserCreateScreen().routeName: (context) => UserCreateScreen(),
+
+        ///Product Screen
+        const ProductScreen().routeName: (context) => const ProductScreen(),
+        ProductCreateScreen().routeName: (context) => ProductCreateScreen(),
+
+        ///Company Screen
         const CompanyScreen().routeName: (context) => const CompanyScreen(),
+
+        ///Accounting Records Screen
         const AccountingRecordsScreen().routeName: (context) => const AccountingRecordsScreen(),
       },
     );

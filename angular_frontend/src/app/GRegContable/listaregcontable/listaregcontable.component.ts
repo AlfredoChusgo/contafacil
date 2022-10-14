@@ -10,7 +10,9 @@ import { RegContableService } from 'src/app/service/reg-contable.service';
 export class ListaregcontableComponent implements OnInit {
   lregcontabledata:any;
   produtos:any;
-
+  startDate:any;
+  endDate:any;
+  
   constructor(private servRegConta:RegContableService,private servProducto:ProductoService) {
     this.LoadAll();
     this.servRegConta.Refreshrequired.subscribe(
@@ -45,6 +47,19 @@ export class ListaregcontableComponent implements OnInit {
         this.LoadAll();
       });
     }
+  }
+
+  filter(){
+    this.servRegConta.LoadAllRegContableByDate(this.startDate,this.endDate).subscribe(
+      result=>{
+        this.lregcontabledata=result;
+        console.log(this.lregcontabledata);
+      }
+    )
+  }
+
+  generateExcelFileLink():string{
+    return this.servRegConta.GetExcelFileLink(this.startDate,this.endDate);
   }
 
 }

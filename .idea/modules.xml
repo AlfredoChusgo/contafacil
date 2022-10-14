@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/conta_facil.iml" filepath="$PROJECT_DIR$/.idea/conta_facil.iml" />
       <module fileurl="file://$PROJECT_DIR$/flutter_frontend/flutter_frontend.iml" filepath="$PROJECT_DIR$/flutter_frontend/flutter_frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flutter_frontend/android/flutter_frontend_android.iml" filepath="$PROJECT_DIR$/flutter_frontend/android/flutter_frontend_android.iml" />
     </modules>
   </component>
 </project>
